@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     TextInput,
@@ -6,25 +6,25 @@ import {
     Text,
     TouchableOpacity,
     StyleSheet,
-    StatusBar,
-    ImageBackground,
-    Pressable,
     Platform,
-    FlatList,
     Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { locations } from "../constants/locations";
 import COLORS from "../constants/colors";
-const AttractionTicket = () => {
-    const adultPrice = locations[0].categories[5].adultPrice;
-    const teenPrice = locations[0].categories[5].teenPrice;
-    const childrenPrice = locations[0].categories[5].childPrice;
+
+const AttractionTicket = ({ location }) => {
+    const adultPrice = location.categories[5].adultPrice;
+    const teenPrice = location.categories[5].teenPrice;
+    const childrenPrice = location.categories[5].childPrice;
+
+    // Use state to store quantity of tickets
     const [quantity_adult, setQuantity_adult] = useState(0);
     const [quantity_teen, setQuantity_teen] = useState(0);
     const [quantity_child, setQuantity_child] = useState(0);
-    const index = 0;
+
+    // // Use state to store booked ticket
+    // const [bookedTickets, setBookedTickets] = useState([]);
     // Increase and decrease quantity
     // Adult
     const increaseQuantity_adult = () => {
@@ -81,11 +81,20 @@ const AttractionTicket = () => {
                         timeDifference >= 0 &&
                         timeDifference <= 6 * 30 * 24 * 60 * 60 * 1000
                     ) {
+                        // Store the booked ticket information
+                        const bookedTicket = {
+                            quantity_adult,
+                            quantity_teen,
+                            quantity_child,
+                            dateOfVisit,
+                        };
+
                         setQuantity_adult(0);
                         setQuantity_child(0);
                         setQuantity_teen(0);
                         setdateOfVisit("");
                         setDate(new Date());
+
                         Alert.alert(
                             "Đặt vé thành công!",
                             "SDT liên hệ: 0359441125\nSTK: 162511202283\nNgân hàng MB Bank\nChủ tài khoản: Nguyễn Diệu Thanh"
@@ -356,7 +365,7 @@ const AttractionTicket = () => {
                                     fontWeight: "700",
                                 }}
                             >
-                                TRẺ EM
+                                TRẺ EM DƯỚI 6 TUỔI
                             </Text>
                         </View>
                         <View
@@ -499,7 +508,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         width: 40,
         textAlign: "center",
-        // backgroundColor: "#ddd",
     },
     input: {
         color: "black",

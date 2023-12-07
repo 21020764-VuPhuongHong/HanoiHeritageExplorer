@@ -14,8 +14,46 @@ import { passwordValidator } from '../../helpers/passwordValidator'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
+import * as Facebook from "expo-auth-session/providers/facebook"
+import * as WebBrowser from "expo-web-browser"
+
+
+WebBrowser.maybeCompleteAuthSession()
 
 const Login = ({ navigation }) => {
+  const[user, setUser] = useState(null);
+  const [request, response, promptAsync] = Facebook.useAuthRequest({
+    clientId: '1073189397046597',
+
+  })
+
+  useEffect(() => {
+    if (response && response.type === 'success' && response.authentication) {
+      (async () => {
+        const userInfoResponse = await fetch(
+          `https://graph.facebook.com/me?access_token=${response.authentication.accessToken}&fields=id,name,picture.type(large)`
+        )
+        const userInfo = await userInfoResponse.json();
+        setUser(userInfo);
+        console.log(JSON.stringify(response));
+      })();
+    }
+  }, [response])
+
+
+
+  const handleFbPressed = async () => {
+    const result = await promptAsync();
+    if (result.type !== "success") {
+      Alert.alert("Uh oh, something went wrong!");
+      return;
+    }
+  }
+
+
+
+
+
   //global state
   const [state, setState] = useContext(AuthContext);
 
@@ -170,7 +208,11 @@ const Login = ({ navigation }) => {
           <FontAwesome5 name='google' size={20} color='white' />
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.iconButton, {backgroundColor: '#1e309c'}]}>
+        <TouchableOpacity 
+          style={[styles.iconButton, {backgroundColor: '#1e309c'}]}
+          onPress={handleFbPressed}
+          
+          >
           <FontAwesome5 name='facebook-f' size={20} color='white' />
         </TouchableOpacity>
       </View>

@@ -25,9 +25,11 @@ import FontSizeSettings from "../../screens/settings/FontSizeSettings";
 import AppUpdatesSettings from "../../screens/settings/AppUpdatesSettings";
 import MapScreen from "../../screens/MapScreen"
 import { useFonts } from "expo-font";
-import StoryScreen from "../../screens/StoryScreen";
+import NotificationScreen from "../../screens/NotificationScreen";
+import EventScreen from "../../screens/EventScreen";
+import AttractionScreen from "../../screens/AttractionScreen";
 const ScreenMenu = () => {
-  
+
   //global state
   const [state] = useContext(AuthContext);
   //auth condition true false
@@ -53,20 +55,26 @@ const ScreenMenu = () => {
         <>
           <Stack.Screen
             name="Home"
+            component={AttractionScreen}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
+            name="Map"
             component={MapScreen}
             options={{ headerShown: false }}
           />
 
           <Stack.Screen
-            name="Story"
-            component={StoryScreen}
+            name="Notifications"
+            component={NotificationScreen}
             options={{ headerShown: false }}
           />
 
           <Stack.Screen
-            name="Myposts"
-            component={Myposts}
-
+            name="Event"
+            component={EventScreen}
+            options={{ headerShown: false }}
           />
 
           <Stack.Screen

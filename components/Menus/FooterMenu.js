@@ -26,15 +26,15 @@ const FooterMenu = () => {
           </View>
           <Text style={route.name !== "Home" ? { color: COLORS.grey } : { color: theme.colors.third }}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate("Myposts")}>
-          <View style={[styles.iconContainer, route.name !== "Myposts" ? { backgroundColor: 'transparent' } : { backgroundColor: COLORS.light_gray }]}>
+        <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
+          <View style={[styles.iconContainer, route.name !== "Notifications" ? { backgroundColor: 'transparent' } : { backgroundColor: COLORS.light_gray }]}>
             <FontAwesome5
               name="bell"
               style={styles.iconStyle}
-              color={route.name !== "Myposts" ? COLORS.grey : theme.colors.third}
+              color={route.name !== "Notifications" ? COLORS.grey : theme.colors.third}
             />
           </View>
-          <Text style={route.name !== "Myposts" ? { color: COLORS.grey } : { color: theme.colors.third }}>Notification</Text>
+          <Text style={route.name !== "Notifications" ? { color: COLORS.grey } : { color: theme.colors.third }}>Notifications</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tabContainer} onPress={() => navigation.navigate("Profile")}>
           <View style={[styles.iconContainer, route.name !== "Profile" ? { backgroundColor: 'transparent' } : { backgroundColor: COLORS.light_gray }]}>

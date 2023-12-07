@@ -35,6 +35,10 @@
           "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNsb2tkMTVzMzI5OHYybHBsYTA2b25ydmcifQ.aaWG0irRntbIhoB8X6ySsQ"
         }
       ]
+    ],
+    "scheme": [
+      "HanoiHeritageExplorer", "fb1073189397046597"
     ]
   }
 }
+

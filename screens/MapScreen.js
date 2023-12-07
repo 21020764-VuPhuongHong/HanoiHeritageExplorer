@@ -50,7 +50,7 @@ function Map() {
     const [distance, setDistance] = useState(0)
     const [waypoints, setWaypoints] = useState([])
     const [displayRouteToWaypoints, setDisplayRouteToWaypoints] = useState(false)
-    const [userLocation, setUserLocation] = useState([-1, -1])
+    const [userLocation, setUserLocation] = useState([0, 0])
     const [displayLocation, setDisplayLocation] = useState(false)
 
     // constants
@@ -98,7 +98,7 @@ function Map() {
     }, []);
 
     useEffect(() => {
-        if (userLocation[0] !== -1 && userLocation[1] !== -1) {
+        if (!userLocation[0] && !userLocation[1]) {
             waypoints.push(userLocation)
         }
     }, [userLocation])

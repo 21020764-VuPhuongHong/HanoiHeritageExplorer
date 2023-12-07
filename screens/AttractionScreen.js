@@ -13,12 +13,14 @@ import AttractionOverview from "../components/AttractionOverview";
 import AttractionHistory from "../components/AttractionHistory";
 import AttractionArchitecture from "../components/AttractionArchitecture";
 import AttractionTicket from "../components/AttractionTicket";
-import FooterMenu from "../components/Menus/FooterMenu";
+import AttractionImage from "../components/AttractionImage";
+import AttractionVideo from "../components/AttractionVideo";
+import AttractionFeedback from "../components/AttractionFeedback";
+
 import { locations } from "../constants/locations";
 
-const StoryScreen = ({ route, navigation }) => {
-    // const { index } = route.params;
-    const index = 0;
+const AttractionScreen = ({ route, navigation }) => {
+    const { index } = route.params;
     const screenWidth = Dimensions.get("window").width;
     const [activeCategory, setActiveCategory] = useState(1);
 
@@ -49,8 +51,14 @@ const StoryScreen = ({ route, navigation }) => {
                         screenWidth={screenWidth}
                     />
                 );
+            case 4:
+                return <AttractionImage location={location} />;
+            case 5:
+                return <AttractionVideo location={location} />;
             case 6:
-                return <AttractionTicket />;
+                return <AttractionTicket location={location} />;
+            case 7:
+                return <AttractionFeedback location={location} />;
             default:
                 return (
                     <ScrollView style={{ flex: 1, paddingLeft: 16 }}>
@@ -93,14 +101,11 @@ const StoryScreen = ({ route, navigation }) => {
                 {/* Body content */}
                 {renderLocation(locations[index], activeCategory)}
             </View>
-            <View style={{ backgroundColor: "#ffffff" }}>
-                <FooterMenu />
-            </View>
         </View>
     );
 };
 
-export default StoryScreen;
+export default AttractionScreen;
 
 const styles = StyleSheet.create({
     // Your styles here
