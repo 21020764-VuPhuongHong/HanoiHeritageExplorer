@@ -50,7 +50,7 @@ function Map() {
     const [distance, setDistance] = useState(0)
     const [waypoints, setWaypoints] = useState([])
     const [displayRouteToWaypoints, setDisplayRouteToWaypoints] = useState(false)
-    const [userLocation, setUserLocation] = useState([105.7820467, 21.0405764])
+    const [userLocation, setUserLocation] = useState([-1, -1])
     const [displayLocation, setDisplayLocation] = useState(false)
 
     // constants
@@ -87,11 +87,7 @@ function Map() {
     const waypointRef = useRef()
 
 
-    useEffect(() => {
-        if (userLocation) {
-            waypoints.push(userLocation)
-        }
-    }, [userLocation])
+    
 
     // get user's current coordinates
     useEffect(() => {
@@ -100,6 +96,12 @@ function Map() {
             setUserLocation([coordinate.coords.longitude, coordinate.coords.latitude]);
         })();
     }, []);
+
+    useEffect(() => {
+        if (userLocation[0] !== -1 && userLocation[1] !== -1) {
+            waypoints.push(userLocation)
+        }
+    }, [userLocation])
 
     // handle add to waypoint button color after being pressed
     useEffect(() => {
