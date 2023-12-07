@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     View,
     Text,
@@ -19,9 +19,11 @@ import AttractionFeedback from "../components/AttractionFeedback";
 import FooterMenu from "../components/Menus/FooterMenu";
 
 import { locations } from "../constants/locations";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AttractionScreen = ({ route, navigation }) => {
-    const index  = 1;
+
+    const index = route.params.placeId;
     const screenWidth = Dimensions.get("window").width;
     const [activeCategory, setActiveCategory] = useState(1);
 

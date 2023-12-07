@@ -5,7 +5,7 @@ import COLORS from "../constants/colors";
 const Splash = ({ navigation }) => {
   setTimeout(() => {
     navigation.replace("Onboarding"); // replace the current screen with "Onboarding"
-  }, 1000);
+  }, 1500);
 
   return (
     <View

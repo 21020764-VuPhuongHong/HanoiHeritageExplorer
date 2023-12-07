@@ -25,11 +25,12 @@ import Stars from 'react-native-stars';
 import darkGreyPin from '../assets/icons/map-marker-alt-solid-yellow-yellow-background.png'
 import redPin from '../assets/icons/map-marker-alt-solid-red.png'
 import Constants from "expo-constants"
-import Locations from '../dev-data/locations'
+import Locations from '../dev-data/attractions'
 import utils from '../utils/utils'
 import { useSharedValue } from 'react-native-reanimated';
 import * as expoLocation from 'expo-location'
 import FooterMenu from "../components/Menus/FooterMenu";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 MapboxGL.setWellKnownTileServer('Mapbox')
 MapboxGL.setAccessToken('pk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNscGEydHRqMDAyenIyanJsZDIzZ2ptYnkifQ.lgAafxD6INU3ufH3N09Xcw');
@@ -37,7 +38,7 @@ MapboxGL.setAccessToken('pk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNscGEydHRqMDAyenIyanJs
 
 MapboxGL.setTelemetryEnabled(false);
 
-function Map() {
+const Map = ({navigation}) => {
     const [typeOfPlace, setTypeOfPlace] = useState("")
     const [selectedItemId, setSelectedItemId] = useState(-1);
     const [selectedPlace, setSelectedPlace] = useState(null)
@@ -50,7 +51,7 @@ function Map() {
     const [distance, setDistance] = useState(0)
     const [waypoints, setWaypoints] = useState([])
     const [displayRouteToWaypoints, setDisplayRouteToWaypoints] = useState(false)
-    const [userLocation, setUserLocation] = useState([0, 0])
+    const [userLocation, setUserLocation] = useState([100, 100])
     const [displayLocation, setDisplayLocation] = useState(false)
 
     // constants
@@ -98,7 +99,7 @@ function Map() {
     }, []);
 
     useEffect(() => {
-        if (!userLocation[0] && !userLocation[1]) {
+        if (userLocation[0] !== 100 && userLocation[1] !== 100) {
             waypoints.push(userLocation)
         }
     }, [userLocation])
@@ -541,7 +542,7 @@ function Map() {
                             <BottomSheetScrollView horizontal style={styles.imageContainer}>
                                 {[...Array(10)].map((_, i) => (
                                     <Image
-                                        key={i}
+                                        keny={i}
                                         source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')}
                                         style={styles.image}
                                     />
@@ -565,7 +566,21 @@ function Map() {
 
                                 <TouchableOpacity
                                     style={[styles.button, styles.getDetailsButton]}
-                                    onPress={() => { console.log("Get direction button clicked") }}
+                                    onPress={async () => { 
+                                        try {
+
+                                            // await AsyncStorage.removeItem('@placeId');
+                                            // await AsyncStorage.setItem('@placeId', selectedPlace.id.toString());
+                                            // console.log(selectedPlace.id.toString())
+                                            navigation.navigate("Attractions", {
+                                                placeId: selectedPlace.id
+                                            })
+                                            console.log(selectedPlace.id)
+                                        } catch (e) {
+                                            console.log(e)
+                                        }
+                                        
+                                     }}
                                 >
                                     <Text style={[styles.buttonText, styles.getDetailsText]}>Get Details</Text>
                                 </TouchableOpacity>
@@ -575,6 +590,7 @@ function Map() {
                                     onPress={() => {
                                         if (!waypoints.includes(selectedPlace.coordinate)) {
                                             setWaypoints([...waypoints, selectedPlace.coordinate])
+                        
                                         } else {
                                             setWaypoints(waypoints.filter((waypoint) => waypoint !== selectedPlace.coordinate))
                                         }
@@ -813,4 +829,6 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Map
+
+export default Map;
+

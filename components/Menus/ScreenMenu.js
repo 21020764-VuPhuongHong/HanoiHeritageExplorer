@@ -53,13 +53,13 @@ const ScreenMenu = () => {
         <>
           <Stack.Screen
             name="Home"
-            component={AttractionScreen}
+            component={MapScreen}
             options={{ headerShown: false }}
           />
 
           <Stack.Screen
-            name="Map"
-            component={MapScreen}
+            name="Attractions"
+            component={AttractionScreen}
             options={{ headerShown: false }}
           />
 
