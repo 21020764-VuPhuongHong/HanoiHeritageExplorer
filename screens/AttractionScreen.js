@@ -19,7 +19,6 @@ import AttractionFeedback from "../components/AttractionFeedback";
 import FooterMenu from "../components/Menus/FooterMenu";
 
 import { locations } from "../constants/locations";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AttractionScreen = ({ route, navigation }) => {
 

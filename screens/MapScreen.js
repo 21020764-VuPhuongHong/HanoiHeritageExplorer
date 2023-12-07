@@ -30,7 +30,6 @@ import utils from '../utils/utils'
 import { useSharedValue } from 'react-native-reanimated';
 import * as expoLocation from 'expo-location'
 import FooterMenu from "../components/Menus/FooterMenu";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 MapboxGL.setWellKnownTileServer('Mapbox')
 MapboxGL.setAccessToken('pk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNscGEydHRqMDAyenIyanJsZDIzZ2ptYnkifQ.lgAafxD6INU3ufH3N09Xcw');
@@ -79,7 +78,7 @@ const Map = ({navigation}) => {
     const snapPoints = useMemo(() => ['50%', '100%'], [])
     const [suggestionScrollViewMarginTop, setSuggestionScrollViewMarginTop] = useState(10)
     const [addToWayPointButtonColor, setAddToWayPointButtonColor] = useState("green")
-    const [addToWayPointButtonText, setAddToWayPointButtonText] = useState("Add to Waypoints")
+    const [addToWayPointButtonText, setAddToWayPointButtonText] = useState("Thêm vào chặng")
     const bottomSheetPosition = useSharedValue(0)
     const addToWayPointButtonContainerHeight = Dimensions.get("window").height * 0.4 + 100
 
@@ -110,11 +109,11 @@ const Map = ({navigation}) => {
         if (selectedPlace) {
             if (waypoints.includes(selectedPlace.coordinate)) {
                 setAddToWayPointButtonColor("red")
-                setAddToWayPointButtonText("Remove from waypoint")
+                setAddToWayPointButtonText("Xoá khỏi chặng")
             }
             else {
                 setAddToWayPointButtonColor("green")
-                setAddToWayPointButtonText("Add to Waypoints")
+                setAddToWayPointButtonText("Thêm vào chặng")
             }
         }
 
@@ -372,7 +371,7 @@ const Map = ({navigation}) => {
                         data={autoCompleteData}
                         value={query}
                         onChangeText={setQuery}
-                        placeholder="Search your place"
+                        placeholder="Tìm điểm đến..."
                         inputContainerStyle={styles.inputContainerStyle}
 
                         flatListProps={{
@@ -561,7 +560,7 @@ const Map = ({navigation}) => {
                                         console.log(selectedItemId)
                                     }}
                                 >
-                                    <Text style={[styles.buttonText, styles.viewDirectionText]}>View Directions</Text>
+                                    <Text style={[styles.buttonText, styles.viewDirectionText]}>Chỉ đường</Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
@@ -582,7 +581,7 @@ const Map = ({navigation}) => {
                                         
                                      }}
                                 >
-                                    <Text style={[styles.buttonText, styles.getDetailsText]}>Get Details</Text>
+                                    <Text style={[styles.buttonText, styles.getDetailsText]}>Xem chi tiết</Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
@@ -783,7 +782,7 @@ const styles = StyleSheet.create({
         borderColor: "#4285F4"
     },
     buttonText: {
-        fontSize: 10,
+        fontSize: 13,
         fontWeight: 'bold',
         textAlign: 'center',
         fontWeight: "400"
