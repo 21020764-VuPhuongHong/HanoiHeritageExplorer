@@ -109,7 +109,7 @@ const Map = ({navigation}) => {
         if (selectedPlace) {
             if (waypoints.includes(selectedPlace.coordinate)) {
                 setAddToWayPointButtonColor("red")
-                setAddToWayPointButtonText("Xoá khỏi chặng")
+                setAddToWayPointButtonText("Xoá khỏi chặng ")
             }
             else {
                 setAddToWayPointButtonColor("green")
@@ -542,7 +542,7 @@ const Map = ({navigation}) => {
                                 {[...Array(10)].map((_, i) => (
                                     <Image
                                         keny={i}
-                                        source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')}
+                                        source={{uri: selectedPlace.images[i]}}
                                         style={styles.image}
                                     />
                                 ))}

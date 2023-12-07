@@ -44,7 +44,6 @@ const SettingsScreen = ({ navigation }) => {
   const logout = async () => {
     setState({ token: "", user: null });
     await AsyncStorage.removeItem("@auth");
-    Alert.alert("Logout successfully!");
   };
 
   const items = [
