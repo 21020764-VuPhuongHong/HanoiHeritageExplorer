@@ -7,7 +7,7 @@ import {
     StyleSheet,
     Dimensions,
 } from "react-native";
-import Header from "../components/Header";
+import Header from "../components/ContentHeader";
 import CategorySlider from "../components/CategorySlider";
 import AttractionOverview from "../components/AttractionOverview";
 import AttractionHistory from "../components/AttractionHistory";
@@ -16,11 +16,12 @@ import AttractionTicket from "../components/AttractionTicket";
 import AttractionImage from "../components/AttractionImage";
 import AttractionVideo from "../components/AttractionVideo";
 import AttractionFeedback from "../components/AttractionFeedback";
+import FooterMenu from "../components/Menus/FooterMenu";
 
 import { locations } from "../constants/locations";
 
 const AttractionScreen = ({ route, navigation }) => {
-    const { index } = route.params;
+    const index  = 1;
     const screenWidth = Dimensions.get("window").width;
     const [activeCategory, setActiveCategory] = useState(1);
 
@@ -100,6 +101,9 @@ const AttractionScreen = ({ route, navigation }) => {
 
                 {/* Body content */}
                 {renderLocation(locations[index], activeCategory)}
+            </View>
+            <View style={{ backgroundColor: "#ffffff" }}>
+                <FooterMenu />
             </View>
         </View>
     );

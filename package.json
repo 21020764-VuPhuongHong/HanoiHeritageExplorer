@@ -63,8 +63,7 @@
     "react-native-video": "^5.2.1",
     "react-native-webview": "13.2.2",
     "react-native-youtube": "^2.0.2",
-    "react-native-youtube-iframe": "^2.3.0",
-    "react-native-date-picker": "^4.3.3"
+    "react-native-youtube-iframe": "^2.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

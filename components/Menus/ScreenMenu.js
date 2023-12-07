@@ -2,7 +2,6 @@ import { View, Text, StatusBar } from "react-native";
 import * as React from "react";
 import { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "../../screens/Home";
 import Register from "../../screens/auth/Register";
 import Login from "../../screens/auth/Login";
 import { AuthContext } from "../../context/authContext";
@@ -16,7 +15,6 @@ import Settings from "../../screens/settings/Settings";
 import NotificationSettings from "../../screens/settings/NotificationSettings";
 import DarkModeSettings from "../../screens/settings/DarkModeSettings";
 import LanguageSettings from "../../screens/settings/LanguageSettings";
-import Myposts from "../../screens/Myposts";
 import Splash from "../../screens/Splash";
 import OnboardingScreen from "../../screens/OnboardingScreen"
 import ForgotPassword from "../../screens/auth/ForgotPassword";
