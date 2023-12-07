@@ -135,6 +135,7 @@ function Map() {
         if (selectedPlace) {
             console.log("fetch distance and duration")
             fetchDirection()
+            console.log(routeDirections)
         }
     }, [selectedPlace])
 
@@ -181,8 +182,8 @@ function Map() {
     const fetchDirection = async () => {
         let res = await utils.fetchDirection(utils.generateDirectionQueryString(
             {
-                longitude: 105.782096,
-                latitude: 21.040622
+                longitude: userLocation[0],
+                latitude: userLocation[1]
             },
             {
                 longitude: selectedPlace.coordinate[0],
@@ -193,6 +194,7 @@ function Map() {
 
         setDuration(parseFloat(res["routes"][0]["duration"] / 60).toFixed(2))
         setDistance(parseFloat(res["routes"][0]["distance"] / 1000).toFixed(2))
+        console.log(routeDirections)
         setRouteDirections({
             type: 'FeatureCollection',
             features: [
@@ -426,6 +428,8 @@ function Map() {
                 {/* {displayLocation && showLocation()} */}
                 {query && showLocation(selectedItemId)}
 
+         
+
                 {/* Showing direction */}
                 {(displayRoute || displayRouteToWaypoints) && routeDirections && selectedItemId && (
                     <MapboxGL.ShapeSource id="line1" shape={routeDirections}>
@@ -439,6 +443,7 @@ function Map() {
                                 lineCap: 'round'
                             }}
                         />
+                      
                     </MapboxGL.ShapeSource>
                 )}
 
@@ -548,6 +553,9 @@ function Map() {
                                     style={[styles.button, styles.viewDirectionButton]}
                                     onPress={async () => {
                                         setDisplayRoute(true)
+                                        console.log('display route')
+                                        console.log(routeDirections)
+                                        console.log(selectedItemId)
                                     }}
                                 >
                                     <Text style={[styles.buttonText, styles.viewDirectionText]}>View Directions</Text>

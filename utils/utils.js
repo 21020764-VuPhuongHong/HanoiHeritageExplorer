@@ -1,6 +1,6 @@
 
 exports.generateDirectionQueryString = (start, end) => {
-    const queryString = `https://api.mapbox.com/directions/v5/mapbox/driving/${start.longitude},${start.latitude};${end.longitude},${end.latitude}?geometries=geojson&overview=full&access_token=${process.env.MAPBOX_ACCESS_TOKEN}`
+    const queryString = `https://api.mapbox.com/directions/v5/mapbox/driving/${start.longitude},${start.latitude};${end.longitude},${end.latitude}?geometries=geojson&overview=full&access_token=pk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNscGEydHRqMDAyenIyanJsZDIzZ2ptYnkifQ.lgAafxD6INU3ufH3N09Xcw`
     return queryString
 }
 
@@ -11,7 +11,7 @@ exports.generateWaypointsDirectionQueryString = (waypoints) => {
     }
     waypointsString = waypointsString.substring(0, waypointsString.length - 1)
 
-    const queryString = `https://api.mapbox.com/directions/v5/mapbox/driving/${waypointsString}?geometries=geojson&overview=full&access_token=${process.env.MAPBOX_ACCESS_TOKEN}`
+    const queryString = `https://api.mapbox.com/directions/v5/mapbox/driving/${waypointsString}?geometries=geojson&overview=full&access_token=pk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNscGEydHRqMDAyenIyanJsZDIzZ2ptYnkifQ.lgAafxD6INU3ufH3N09Xcw`
     return queryString
 }
 
